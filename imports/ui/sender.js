@@ -3,6 +3,7 @@ import './sender.html'
 const webSocket = new WebSocket("ws://127.0.0.1:5000")
 
 webSocket.onmessage = (event) => {
+
     handleSignallingData(JSON.parse(event.data))
 }
 
@@ -47,6 +48,7 @@ function startCall() {
         },
         audio: true
     }, (stream) => {
+        console.log('----------'+stream);
         localStream = stream
         document.getElementById("local-video").srcObject = localStream
 
@@ -79,8 +81,9 @@ function startCall() {
 
         createAndSendOffer()
     }, (error) => {
-        console.log(error)
-    })
+        console.log('----'+error)
+    }
+    )
 }
 
 function createAndSendOffer() {
@@ -106,6 +109,28 @@ let isVideo = true
 function muteVideo() {
     isVideo = !isVideo
     localStream.getVideoTracks()[0].enabled = isVideo
+/* 
+    if (_videoTrack) {
+        _videoTrack.stop();
+        _videoTrack = null;
+        document.getElementById('videoCtr').srcObject = null;
+        $("#btnStartStopCam").text("Start Camera");
+        return;
+    }
+    try {
+        var vstream = await navigator.mediaDevices.getUserMedia({ video: true,audio:true });
+        console.log('----video stream ---'+vstream);
+        if (vstream && vstream.getVideoTracks().length > 0) {
+            _videoTrack = vstream.getVideoTracks()[0];
+            console.log('----video track ---'+_videoTrack);
+            document.getElementById('videoCtr').srcObject = new MediaStream([_videoTrack]);  
+            console.log(_videoTrack.readyState )  
+            $("#btnStartStopCam").text("Stop Camera");
+        }
+    } catch (e) {
+        console.log(e);
+        return;
+    } */
 }
 
 Template.sender.events({

@@ -1,0 +1,17 @@
+<template name="sender1">
+    <div>
+        <input placeholder="Enter username..."
+                type="text"
+                id="username-input" /><br>
+        <button id="sendUsername">Send</button>
+        <button id="startCall">Start Call</button>
+    </div>
+    <div id="video-call-div">
+        <video muted id="local-video" autoplay></video>
+        <video id="remote-video" autoplay></video>
+        <div class="call-action-div">
+            <button id="muteVideo">Mute Video</button>
+            <button id="muteAudio">Mute Audio</button>
+        </div>
+    </div>
+</template>

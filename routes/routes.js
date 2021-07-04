@@ -23,11 +23,25 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
       BlazeLayout.render('home',{main:'sender'});
     }
   });
+  FlowRouter.route('/sender1', {
+    name: 'sender1',
+     async action() {
+      await import('../imports/ui/sender1.js');
+      BlazeLayout.render('home',{main:'sender1'});
+    }
+  });
 
   FlowRouter.route('/receiver', {
     name: 'receiver',
      async action() {
       await import('../imports/ui/receiver.js');
       BlazeLayout.render('home',{main:'receiver'});
+    }
+  });
+  FlowRouter.route('/receiver1', {
+    name: 'receiver',
+     async action() {
+      await import('../imports/ui/receiver1.js');
+      BlazeLayout.render('home',{main:'receiver1'});
     }
   });

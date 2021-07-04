@@ -23,11 +23,13 @@ const webSocket = new Socket({ httpServer: server })
 let users = []
 
 webSocket.on('request', (req) => {
+    
     const connection = req.accept()
+
 
     connection.on('message', (message) => {
         const data = JSON.parse(message.utf8Data)
-
+        console.log('--------'+JSON.stringify(data));
         const user = findUser(data.username)
 
         switch(data.type) {
@@ -44,11 +46,13 @@ webSocket.on('request', (req) => {
 
                 users.push(newUser)
                 console.log(newUser.username)
+                console.log(users);
                 break
             case "store_offer":
                 if (user == null)
                     return
                 user.offer = data.offer
+                console.log('----store offer---'+data.offer)
                 break
             
             case "store_candidate":
@@ -59,6 +63,7 @@ webSocket.on('request', (req) => {
                     user.candidates = []
                 
                 user.candidates.push(data.candidate)
+                console.log('----store candidate---'+data.candidate)
                 break
             case "send_answer":
                 if (user == null) {
@@ -79,6 +84,7 @@ webSocket.on('request', (req) => {
                     type: "candidate",
                     candidate: data.candidate
                 }, user.conn)
+
                 break
             case "join_call":
                 if (user == null) {
@@ -97,6 +103,7 @@ webSocket.on('request', (req) => {
                     }, connection)
                 })
 
+
                 break
         }
     })
@@ -112,6 +119,7 @@ webSocket.on('request', (req) => {
 })
 
 function sendData(data, conn) {
+    console.log('----------send data ---'+JSON.stringify(data));
     conn.send(JSON.stringify(data))
 }
 
