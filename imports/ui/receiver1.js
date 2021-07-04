@@ -1,6 +1,10 @@
 import './receiver1.html'
 
-const webSocket = new WebSocket("ws://127.0.0.1:5000")
+
+var HOST = location.origin.replace(/^http/, 'ws')
+const webSocket = new WebSocket(HOST)
+
+//const webSocket = new WebSocket("ws://127.0.0.1:4000")
 
 let localStream
 let peerConn

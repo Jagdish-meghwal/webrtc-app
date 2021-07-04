@@ -1,6 +1,6 @@
 import './sender1.html'
 
-const webSocket = new WebSocket("ws://127.0.0.1:5000")
+const webSocket = new WebSocket("ws://127.0.0.1:4000")
 var localStream
 var _remoteStream = new MediaStream();
 var peerConn
